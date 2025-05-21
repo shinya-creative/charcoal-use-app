@@ -1,7 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import styles from "@/styles/Home.module.css";
+import styled from "styled-components";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,6 +14,22 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const TodoLink = styled.a`
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: ${({ theme }) => theme.color.brand};
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.color.brand};
+    opacity: 0.8;
+  }
+`;
 
 export default function Home() {
   return (
@@ -40,6 +58,10 @@ export default function Home() {
             </li>
             <li>Save and see your changes instantly.</li>
           </ol>
+
+          <Link href="/todo" passHref legacyBehavior>
+            <TodoLink>Go to Todo App</TodoLink>
+          </Link>
 
           <div className={styles.ctas}>
             <a
