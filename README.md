@@ -1,6 +1,7 @@
 ## 🔍 概要
 
-このプロジェクトは、pixiv/charcoal[https://github.com/pixiv/charcoal/] のシステムデザインをベースにした シンプルなTodoリストアプリ です。コンポーネントベースの開発・デザインシステムの学習や、UIライブラリとの統合に関心のある方に最適です。
+このプロジェクトは、[pixiv/charcoal](https://github.com/pixiv/charcoal/ "charcoal") のシステムデザインをベースにした シンプルなTodoリストアプリ です。コンポーネントベースの開発・デザインシステムの学習や、UIライブラリとの統合に関心のある方に最適です。
+
 
 ## 🌟 特徴
 
@@ -9,7 +10,8 @@
 - ✅ タスクの 追加 / 編集 / 削除 / フィルター 対応
 - ✅ Vercel でデプロイ済み・すぐに使える
 
-### 👉アプリを試す[charcoal-use-app.vercel.app] (Vercel)
+### 👉[アプリを試す](charcoal-use-app.vercel.app "Todo-App") (Vercel)
+
 
 ## ✨ 使用技術
 
@@ -21,14 +23,19 @@
 - Storybook
 - Vercel
 
+
 ## 🧪 Storybook
 コンポーネントは Storybook にて確認できます。
 - Button
 
+
 ## 🚀 セットアップ方法
+
 ```bash
 git clone https://github.com/[ユーザー名]/[リポジトリ名].git
+
 cd [リポジトリ名]
+
 npm install
 npm run dev
 ```
@@ -37,6 +44,7 @@ Storybook を起動するには：
 ```bash
 npm run storybook
 ```
+
 
 ### 📂 機能一覧
  
@@ -47,10 +55,13 @@ npm run storybook
 - ✅ CharcoalベースのButtonコンポーネントをStorybookで確認可能
 
 🖥️ デプロイ
-本アプリは Vercel[https://vercel.com/] にてホスティングされています：
-👉 charcoal-use-app.vercel.app[charcoal-use-app.vercel.app]
+本アプリは [Vercel](https://vercel.com/ "Vercel") にてホスティングされています：
+👉 [charcoal-use-app.vercel.app](charcoal-use-app.vercel.app "Todo-App")
+
 
 ## 📎 参考
-Charcoal - GitHub[https://github.com/pixiv/charcoal]
-Vercel[https://vercel.com/]
-Storybook[https://storybook.js.org/]
+[Charcoal - GitHub](https://github.com/pixiv/charcoal "Charcoal")
+
+[Vercel](https://vercel.com/ "Vercel")
+
+[Storybook](https://storybook.js.org/ "Storybook")
