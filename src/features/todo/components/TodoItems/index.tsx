@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Todo } from "@/features/todo/types/todo";
+import { Button } from "@/features/components/Button";
 
 const TodoItemContainer = styled.div<{ completed: boolean }>`
   display: flex;
@@ -59,22 +60,6 @@ const TodoActions = styled.div`
   margin-left: 16px;
 `;
 
-const ActionButton = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: ${({ theme }) => theme.color.text3};
-  font-size: 14px;
-  padding: 4px;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-
-  &:hover {
-    color: ${({ theme }) => theme.color.text1};
-    background-color: ${({ theme }) => theme.color.surface2};
-  }
-`;
-
 interface TodoItemProps {
   todo: Todo;
   onToggleComplete: (id: string) => void;
@@ -107,10 +92,15 @@ export const TodoItem: React.FC<TodoItemProps> = ({
       {(onDelete || onEdit) && (
         <TodoActions>
           {onEdit && (
-            <ActionButton onClick={() => onEdit(todo.id)}>編集</ActionButton>
+            <Button size="small" label="編集" onClick={() => onEdit(todo.id)} />
           )}
           {onDelete && (
-            <ActionButton onClick={() => onDelete(todo.id)}>削除</ActionButton>
+            <Button
+              danger
+              size="small"
+              label="削除"
+              onClick={() => onDelete(todo.id)}
+            />
           )}
         </TodoActions>
       )}

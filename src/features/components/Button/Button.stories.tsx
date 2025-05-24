@@ -19,6 +19,7 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     primary: { control: "boolean" },
+    danger: { control: "boolean" },
     size: {
       control: { type: "select" },
       options: ["small", "medium", "full"],
@@ -80,6 +81,29 @@ export const Disabled: Story = {
   args: {
     primary: true,
     label: "Disabled",
+    disabled: true,
+  },
+};
+
+export const Danger: Story = {
+  args: {
+    danger: true,
+    label: "Danger",
+  },
+};
+
+export const DangerSmall: Story = {
+  args: {
+    danger: true,
+    size: "small",
+    label: "Danger Small",
+  },
+};
+
+export const DangerDisabled: Story = {
+  args: {
+    danger: true,
+    label: "Danger Disabled",
     disabled: true,
   },
 };

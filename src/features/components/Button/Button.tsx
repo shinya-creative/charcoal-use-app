@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export type ButtonProps = {
   primary?: boolean;
+  danger?: boolean;
   size?: "small" | "medium" | "full";
   label: string;
   onClick?: () => void;
@@ -37,6 +38,7 @@ const getButtonSize = (size: "small" | "medium" | "full") => {
 
 const StyledButton = styled.button<{
   $primary: boolean;
+  $danger: boolean;
   $size: "small" | "medium" | "full";
   disabled: boolean;
 }>`
@@ -60,14 +62,35 @@ const StyledButton = styled.button<{
   /* サイズに基づくスタイル */
   ${({ $size }) => getButtonSize($size)}
 
-  /* プライマリかセカンダリかに基づくスタイル */
-  ${({ $primary, disabled, theme }) => {
+  /* プライマリ、デンジャー、セカンダリに基づくスタイル */
+  ${({ $primary, $danger, disabled, theme }) => {
     if (disabled) {
       return `
         background-color: ${theme.color.surface3};
         color: ${theme.color.text3};
         box-shadow: none;
         pointer-events: none;
+      `;
+    }
+
+    if ($danger) {
+      return `
+        background-color: ${theme.color.assertive};
+        color: ${theme.color.text5};
+
+        &:hover {
+          background-color: ${theme.color.assertive};
+          filter: brightness(1.05);
+        }
+
+        &:active {
+          background-color: ${theme.color.assertive};
+          filter: brightness(0.95);
+        }
+
+        &:focus-visible {
+          box-shadow: 0 0 0 2px ${theme.color.surface1}, 0 0 0 4px ${theme.color.assertive};
+        }
       `;
     }
 
@@ -117,6 +140,7 @@ const StyledButton = styled.button<{
 
 export const Button = ({
   primary = false,
+  danger = false,
   size = "medium",
   label,
   disabled = false,
@@ -126,6 +150,7 @@ export const Button = ({
     <StyledButton
       type="button"
       $primary={primary}
+      $danger={danger}
       $size={size}
       disabled={disabled}
       aria-disabled={disabled}
