@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TodoFilter } from "./components/TodoFilter";
 import { TodoForm } from "./components/TodoForm";
 import { TodoList } from "./components/TodoList";
+import { TodoEditModal } from "./components/TodoEditModal";
 import { Todo } from "./types/todo";
 import styled from "styled-components";
 
@@ -37,8 +38,8 @@ const TodoStats = styled.div`
 export const TodoPage = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [editingTodoId, setEditingTodoId] = useState<string | null>(null);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [editingTodo, setEditingTodo] = useState<Todo | null>(null);
 
   // TODOアイテムを追加する関数
   const handleAddTodo = (newTodo: Todo) => {
@@ -63,10 +64,24 @@ export const TodoPage = () => {
 
   // TODOアイテムを編集する関数
   const handleEditTodo = (id: string) => {
-    setEditingTodoId(id);
-    // 実際の編集機能は今回は実装しません
-    // 通常はモーダルやフォームを表示して編集を行います
-    alert(`ID: ${id} のタスクを編集します（この機能は未実装です）`);
+    const todoToEdit = todos.find((todo) => todo.id === id);
+    if (todoToEdit) {
+      setEditingTodo(todoToEdit);
+      setEditModalOpen(true);
+    }
+  };
+
+  // 編集モーダルを閉じる関数
+  const handleCloseEditModal = () => {
+    setEditModalOpen(false);
+    setEditingTodo(null);
+  };
+
+  // 編集したTODOアイテムを保存する関数
+  const handleSaveEditedTodo = (updatedTodo: Todo) => {
+    setTodos(
+      todos.map((todo) => (todo.id === updatedTodo.id ? updatedTodo : todo))
+    );
   };
 
   // フィルターに基づいてTODOアイテムをフィルタリングする関数
@@ -106,6 +121,12 @@ export const TodoPage = () => {
           <span>未完了: {activeTodos}</span>
         </TodoStats>
       )}
+      <TodoEditModal
+        todo={editingTodo}
+        isOpen={editModalOpen}
+        onClose={handleCloseEditModal}
+        onSave={handleSaveEditedTodo}
+      />
     </TodoPageContainer>
   );
 };
