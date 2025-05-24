@@ -1,19 +1,39 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
+import { ThemeProvider } from "styled-components";
+import { light } from "@charcoal-ui/theme";
+import { Button } from "./Button";
 
-import { Button } from "./index";
+// typescriptのエラーを回避し、テーマの型定義の拡張
+const extendedTheme = {
+  ...light,
+  _charcoalExtended: true,
+};
 
 const meta = {
-  title: "Example/Button",
+  title: "Charcoal/Button",
   component: Button,
   parameters: {
-    layout: "centered",
+    layout: "padded",
   },
   tags: ["autodocs"],
   argTypes: {
-    backgroundColor: { control: "color" },
+    primary: { control: "boolean" },
+    danger: { control: "boolean" },
+    size: {
+      control: { type: "select" },
+      options: ["small", "medium", "full"],
+    },
+    disabled: { control: "boolean" },
   },
   args: { onClick: fn() },
+  decorators: [
+    (Story) => (
+      <ThemeProvider theme={extendedTheme}>
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -22,26 +42,68 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     primary: true,
-    label: "Button",
+    label: "Primary",
   },
 };
 
 export const Secondary: Story = {
   args: {
-    label: "Button",
-  },
-};
-
-export const Large: Story = {
-  args: {
-    size: "large",
-    label: "Button",
+    primary: false,
+    label: "Sedondary",
   },
 };
 
 export const Small: Story = {
   args: {
+    primary: true,
     size: "small",
-    label: "Button",
+    label: "Small",
+  },
+};
+
+export const Medium: Story = {
+  args: {
+    primary: true,
+    size: "medium",
+    label: "Medium",
+  },
+};
+
+export const Full: Story = {
+  args: {
+    primary: true,
+    size: "full",
+    label: "Full width",
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    primary: true,
+    label: "Disabled",
+    disabled: true,
+  },
+};
+
+export const Danger: Story = {
+  args: {
+    danger: true,
+    label: "Danger",
+  },
+};
+
+export const DangerSmall: Story = {
+  args: {
+    danger: true,
+    size: "small",
+    label: "Danger Small",
+  },
+};
+
+export const DangerDisabled: Story = {
+  args: {
+    danger: true,
+    label: "Danger Disabled",
+    disabled: true,
   },
 };
