@@ -1,21 +1,18 @@
+import React from "react";
 import styled from "styled-components";
+import Link from "next/link";
+import { Button } from "@/features/components/Button";
 
-const TodoLink = styled.a`
-  display: inline-block;
+const FormContainer = styled.div`
   margin-top: 20px;
-  padding: 10px 20px;
-  background-color: ${({ theme }) => theme.color.brand};
-  color: white;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: bold;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.color.brand};
-    opacity: 0.8;
-  }
 `;
 
-export const TodoFormLink = () => {
-  return <TodoLink href="/todo/form">Go to Todo Form</TodoLink>;
+export const TodoForm = () => {
+  return (
+    <FormContainer>
+      <Link href="/todo/form" passHref legacyBehavior>
+        <Button primary label="Go to Todo Form" />
+      </Link>
+    </FormContainer>
+  );
 };
