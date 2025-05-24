@@ -2,17 +2,13 @@ import styled from "styled-components";
 
 // styled-componentsを使用したコンポーネント
 const FilterContainer = styled.div`
-  width: 300px;
-  border: 1px solid ${({ theme }) => theme.color.border};
+  width: 100%;
+  border: 1px dashed ${({ theme }) => theme.color.border};
   border-radius: 8px;
-  padding: 16px;
-  margin: 16px 0;
-`;
-
-const FilterTitle = styled.h2`
-  font-size: 18px;
-  margin-bottom: 8px;
-  color: ${({ theme }) => theme.color.text1};
+  padding: ${({ theme }) => theme.spacing[40]}px;
+  margin: ${({ theme }) => theme.spacing[16] + `px ` + theme.spacing[0] + `px`};
+  text-align: center;
+  background-color: ${({ theme }) => theme.color.surface1};
 `;
 
 const FilterDescription = styled.p`
@@ -23,8 +19,9 @@ const FilterDescription = styled.p`
 export const TodoFilter = () => {
   return (
     <FilterContainer>
-      <FilterTitle>Todo Filter</FilterTitle>
-      <FilterDescription>Filter your todos here!</FilterDescription>
+      <FilterDescription>
+        タスクがありません。「新しいタスク」ボタンをクリックして追加してください。
+      </FilterDescription>
     </FilterContainer>
   );
 };
