@@ -10,7 +10,7 @@
 - ✅ タスクの 追加 / 編集 / 削除 / フィルター 対応
 - ✅ Vercel でデプロイ済み・すぐに使える
 
-### 👉[アプリを試す](charcoal-use-app.vercel.app "Todo-App") (Vercel)
+### 👉[アプリを試す]([charcoal-use-app.vercel.app](https://charcoal-use-pokhz9tlm-shinyas-projects-d4d518a5.vercel.app/) "Todo-App") (Vercel)
 
 
 ## ✨ 使用技術
@@ -56,7 +56,7 @@ npm run storybook
 
 🖥️ デプロイ
 本アプリは [Vercel](https://vercel.com/ "Vercel") にてホスティングされています：
-👉 [charcoal-use-app.vercel.app](charcoal-use-app.vercel.app "Todo-App")
+👉 [charcoal-use-app.vercel.app](https://charcoal-use-pokhz9tlm-shinyas-projects-d4d518a5.vercel.app/) "Todo-App")
 
 
 ## 📎 参考
