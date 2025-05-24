@@ -1,13 +1,56 @@
-## <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>SearXNG</title><path d="m13.716 17.261 6.873 6.582L24 20.282l-6.824-6.536a9.11 9.11 0 0 0 1.143-4.43c0-5.055-4.105-9.159-9.16-9.159S0 4.261 0 9.316c0 5.055 4.104 9.159 9.159 9.159a9.11 9.11 0 0 0 4.557-1.214ZM9.159 2.773a6.546 6.546 0 0 1 6.543 6.543 6.545 6.545 0 0 1-6.543 6.542 6.545 6.545 0 0 1-6.542-6.542 6.545 6.545 0 0 1 6.542-6.543ZM7.26 5.713a4.065 4.065 0 0 1 4.744.747 4.064 4.064 0 0 1 .707 4.749l1.157.611a5.376 5.376 0 0 0-.935-6.282 5.377 5.377 0 0 0-6.274-.987l.601 1.162Z"/></svg>概要
+## 🔍 概要
 
-charcoal[https://github.com/pixiv/charcoal/]のシステムデザインを使用したTodoリスト
+このプロジェクトは、pixiv/charcoal[https://github.com/pixiv/charcoal/] のシステムデザインをベースにした シンプルなTodoリストアプリ です。コンポーネントベースの開発・デザインシステムの学習や、UIライブラリとの統合に関心のある方に最適です。
 
-## 実装
+## 🌟 特徴
 
-- storybookで閲覧可能なbuttonを実装
-- Taskの追加
-- Taskの編集
-- Taskの削除
-- Taskのフィルタリング
+- ✅ Charcoal のデザインシステムに基づいたUI設計
+- ✅ Storybook でボタンコンポーネントを確認可能
+- ✅ タスクの 追加 / 編集 / 削除 / フィルター 対応
+- ✅ Vercel でデプロイ済み・すぐに使える
 
-### こちら[charcoal-use-app.vercel.app]でアプリを閲覧できます。(Vercel)
+### 👉アプリを試す[charcoal-use-app.vercel.app] (Vercel)
+
+## ✨ 使用技術
+
+- React (Next.js)
+- TypeScript
+- Turborepo
+- Charcoal UI
+- styled-components
+- Storybook
+- Vercel
+
+## 🧪 Storybook
+コンポーネントは Storybook にて確認できます。
+- Button
+
+## 🚀 セットアップ方法
+```bash
+git clone https://github.com/[ユーザー名]/[リポジトリ名].git
+cd [リポジトリ名]
+npm install
+npm run dev
+```
+
+Storybook を起動するには：
+```bash
+npm run storybook
+```
+
+### 📂 機能一覧
+ 
+- ✅ タスクの追加機能
+- ✅ タスクの編集機能
+- ✅ タスクの削除機能
+- ✅ タスクの状態に応じたフィルタリング（すべて / 完了 / 未完了）
+- ✅ CharcoalベースのButtonコンポーネントをStorybookで確認可能
+
+🖥️ デプロイ
+本アプリは Vercel[https://vercel.com/] にてホスティングされています：
+👉 charcoal-use-app.vercel.app[charcoal-use-app.vercel.app]
+
+## 📎 参考
+Charcoal - GitHub[https://github.com/pixiv/charcoal]
+Vercel[https://vercel.com/]
+Storybook[https://storybook.js.org/]
