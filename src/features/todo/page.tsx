@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { TodoFilter } from "./components/TodoFilter";
-import { TodoForm } from "./components/TodoForm";
+import {
+  TodoFormProvider,
+  TodoFormButton,
+  TodoFormInput,
+} from "./components/TodoForm";
 import { TodoList } from "./components/TodoList";
 import { TodoEditModal } from "./components/TodoEditModal";
 import { Todo } from "./types/todo";
@@ -102,31 +106,37 @@ export const TodoPage = () => {
   const activeTodos = totalTodos - completedTodos;
 
   return (
-    <TodoPageContainer>
-      <TodoHeader>
-        <TodoPageTitle>Todo List</TodoPageTitle>
-        <TodoForm onAddTodo={handleAddTodo} />
-      </TodoHeader>
-      <TodoFilter currentFilter={filter} onFilterChange={handleFilterChange} />
-      <TodoList
-        todos={filteredTodos}
-        onToggleComplete={handleToggleComplete}
-        onDeleteTodo={handleDeleteTodo}
-        onEditTodo={handleEditTodo}
-      />
-      {totalTodos > 0 && (
-        <TodoStats>
-          <span>全タスク: {totalTodos}</span>
-          <span>完了: {completedTodos}</span>
-          <span>未完了: {activeTodos}</span>
-        </TodoStats>
-      )}
-      <TodoEditModal
-        todo={editingTodo}
-        isOpen={editModalOpen}
-        onClose={handleCloseEditModal}
-        onSave={handleSaveEditedTodo}
-      />
-    </TodoPageContainer>
+    <TodoFormProvider onAddTodo={handleAddTodo}>
+      <TodoPageContainer>
+        <TodoHeader>
+          <TodoPageTitle>Todo List</TodoPageTitle>
+          <TodoFormButton />
+        </TodoHeader>
+        <TodoFormInput />
+        <TodoFilter
+          currentFilter={filter}
+          onFilterChange={handleFilterChange}
+        />
+        <TodoList
+          todos={filteredTodos}
+          onToggleComplete={handleToggleComplete}
+          onDeleteTodo={handleDeleteTodo}
+          onEditTodo={handleEditTodo}
+        />
+        {totalTodos > 0 && (
+          <TodoStats>
+            <span>全タスク: {totalTodos}</span>
+            <span>完了: {completedTodos}</span>
+            <span>未完了: {activeTodos}</span>
+          </TodoStats>
+        )}
+        <TodoEditModal
+          todo={editingTodo}
+          isOpen={editModalOpen}
+          onClose={handleCloseEditModal}
+          onSave={handleSaveEditedTodo}
+        />
+      </TodoPageContainer>
+    </TodoFormProvider>
   );
 };

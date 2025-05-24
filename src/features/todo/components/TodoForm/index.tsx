@@ -1,9 +1,12 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState, createContext, useContext } from "react";
 import styled from "styled-components";
 import { Button } from "@/features/components/Button";
 import { Todo } from "@/features/todo/types/todo";
 
-const FormContainer = styled.div``;
+// スタイル定義
+const FormContainer = styled.div`
+  margin-bottom: 16px;
+`;
 
 const AddTaskForm = styled.div`
   padding: 16px;
@@ -58,11 +61,31 @@ const ButtonArea = styled.div`
   margin-top: 8px;
 `;
 
-interface TodoFormProps {
-  onAddTodo: (todo: Todo) => void;
+// TodoFormの状態を管理するコンテキスト
+interface TodoFormContextType {
+  showAddForm: boolean;
+  newTitle: string;
+  newDescription: string;
+  setShowAddForm: (show: boolean) => void;
+  handleTitleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleDescriptionChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  handleAddTodo: () => void;
 }
 
-export const TodoForm: React.FC<TodoFormProps> = ({ onAddTodo }) => {
+const TodoFormContext = createContext<TodoFormContextType | undefined>(
+  undefined
+);
+
+// TodoFormProviderコンポーネント
+interface TodoFormProviderProps {
+  onAddTodo: (todo: Todo) => void;
+  children: React.ReactNode;
+}
+
+export const TodoFormProvider: React.FC<TodoFormProviderProps> = ({
+  onAddTodo,
+  children,
+}) => {
   const [newTitle, setNewTitle] = useState("");
   const [newDescription, setNewDescription] = useState("");
   const [showAddForm, setShowAddForm] = useState(false);
@@ -92,47 +115,89 @@ export const TodoForm: React.FC<TodoFormProps> = ({ onAddTodo }) => {
     setNewDescription(e.target.value);
   };
 
+  const value = {
+    showAddForm,
+    newTitle,
+    newDescription,
+    setShowAddForm,
+    handleTitleChange,
+    handleDescriptionChange,
+    handleAddTodo,
+  };
+
+  return (
+    <TodoFormContext.Provider value={value}>
+      {children}
+    </TodoFormContext.Provider>
+  );
+};
+
+// コンテキストを使用するためのフック
+const useTodoForm = () => {
+  const context = useContext(TodoFormContext);
+  if (context === undefined) {
+    throw new Error("useTodoForm must be used within a TodoFormProvider");
+  }
+  return context;
+};
+
+// 「新しいタスク」ボタンコンポーネント
+export const TodoFormButton: React.FC = () => {
+  const { showAddForm, setShowAddForm } = useTodoForm();
+
+  if (showAddForm) return null;
+
+  return (
+    <Button primary label="新しいタスク" onClick={() => setShowAddForm(true)} />
+  );
+};
+
+// タスク入力フォームコンポーネント
+export const TodoFormInput: React.FC = () => {
+  const {
+    showAddForm,
+    newTitle,
+    newDescription,
+    handleTitleChange,
+    handleDescriptionChange,
+    handleAddTodo,
+    setShowAddForm,
+  } = useTodoForm();
+
+  if (!showAddForm) return null;
+
   return (
     <FormContainer>
-      {!showAddForm && (
-        <Button
-          primary
-          label="新しいタスク"
-          onClick={() => setShowAddForm(true)}
-        />
-      )}
-      {showAddForm && (
-        <AddTaskForm>
-          <TaskArea>
-            <InputArea
-              autoFocus
-              type="text"
-              value={newTitle}
-              onChange={handleTitleChange}
-              placeholder="タスク名"
+      <AddTaskForm>
+        <TaskArea>
+          <InputArea
+            autoFocus
+            type="text"
+            value={newTitle}
+            onChange={handleTitleChange}
+            placeholder="タスク名"
+          />
+          <InputTextArea
+            value={newDescription}
+            onChange={handleDescriptionChange}
+            placeholder="詳細（任意）"
+          />
+          <ButtonArea>
+            <Button
+              primary
+              label="追加"
+              size="medium"
+              disabled={!newTitle.trim()}
+              onClick={handleAddTodo}
             />
-            <InputTextArea
-              value={newDescription}
-              onChange={handleDescriptionChange}
-              placeholder="詳細（任意）"
+            <Button
+              label="キャンセル"
+              size="medium"
+              onClick={() => setShowAddForm(false)}
             />
-            <ButtonArea>
-              <Button
-                primary
-                label="追加"
-                size="medium"
-                disabled={!newTitle.trim()}
-                onClick={handleAddTodo}
-              />
-              <Button
-                label="キャンセル"
-                size="medium"
-                onClick={() => setShowAddForm(false)}
-              />
-            </ButtonArea>
-          </TaskArea>
-        </AddTaskForm>
-      )}
+          </ButtonArea>
+        </TaskArea>
+      </AddTaskForm>
     </FormContainer>
   );
 };
